@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WorkTimeTracker.OverviewPage"
+             Title="OverviewPage">
+    <VerticalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Datum" WidthRequest="120" />
+            <Label Text="Start" WidthRequest="70" />
+            <Label Text="Ende" WidthRequest="70" />
+            <Label Text="Arbeitsdauer" />
+        </HorizontalStackLayout>
+
+        <CollectionView x:Name="OverviewList" 
+                        ItemsSource="{Binding}" 
+                        Margin="0,15,0,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <HorizontalStackLayout>
+                        <Label
+                            Text="{Binding StartTime, StringFormat='{0:dd.MM.yyyy}'}"
+                            WidthRequest="120"/>
+                        <Label
+                            Text="{Binding StartTime, StringFormat='{0:HH:mm}'}"
+                            WidthRequest="70"/>
+                        <Label
+                            Text="{Binding EndTime, StringFormat='{0:HH:mm}'}"
+                            WidthRequest="70"/>
+                        <Label
+                            Text="{Binding TimeSpan, StringFormat='{0:hh\\:mm}'}"/>
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button
+            x:Name="DeleteBtn"
+            Text="Einträge löschen"
+            BackgroundColor="Red"
+            SemanticProperties.Hint="Delete all times"
+            Clicked="OnDeleteClicked"
+            HorizontalOptions="Fill" />
+    </VerticalStackLayout>
+</ContentPage>

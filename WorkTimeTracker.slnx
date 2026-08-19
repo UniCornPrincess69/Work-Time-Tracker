@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="WorkTimeTracker/WorkTimeTracker.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+</Solution>
