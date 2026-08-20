@@ -5,56 +5,117 @@
 
     <ScrollView>
         <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
-            
-            <Label
-                Text="Arbeitszeit Tracker"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
-            
-            <Image
+            Padding="24,40"
+            Spacing="20">
+            <!---Header-->
+            <VerticalStackLayout
+            Spacing="4"
+            HorizontalOptions="Center">
+
+                <Image
                 Source="pickleclock.png"
-                HeightRequest="185"
-                Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a submarine number ten" />
+                HeightRequest="110"
+                WidthRequest="110"
+                Aspect="AspectFit"/>
 
-                     
-            <Button
+                <Label
+                Text="Arbeitszeit Tracker"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center"
+                TextColor="#1B5E20" />
+
+                <Label
+                    Text="Gurkentruppe Edition"
+                    FontSize="14"
+                    HorizontalTextAlignment="Center"
+                    TextColor="#607D63"/>
+            </VerticalStackLayout>
+
+            <!--Current Status-->
+            <Border
+                BackgroundColor="White"
+                Stroke="#D7E3D5"
+                StrokeThickness="1"
+                Padding="20"
+                Margin="0,10,0,0">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout
+                    Spacing="6"
+                    HorizontalOptions="Center">
+
+                    <Label
+                        Text="Aktueller Status"
+                        FontSize="12"
+                        FontAttributes="Bold"
+                        TextColor="#78907A"
+                        HorizontalTextAlignment="Center"/>
+
+                    <Label
+                        x:Name="StatusLabel"
+                        Text="Nicht beschäftigt"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="#424242"
+                        HorizontalTextAlignment="Center"/>
+
+                    <Label
+                        x:Name="ElapsedTimeLabel"
+                        Text="00:00:00"
+                        FontSize="36"
+                        FontAttributes="Bold"
+                        TextColor="#1B5E20"
+                        HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!---Main actions-->
+            <Grid
+                ColumnDefinitions="*,*"
+                ColumnSpacing="12">
+
+                <Button
                 x:Name="StartBtn"
-                Text="Start Tracking"
-                BackgroundColor="Green"
-                SemanticProperties.Hint="Begin tracking work time"
-                Clicked="OnStartClicked"
-                HorizontalOptions="Fill" />
-            
-            <Button
-                x:Name="StopBtn"
-                Text="Stop Tracking"
-                BackgroundColor="Red"
-                IsEnabled="False"
-                SemanticProperties.Hint="Stop tracking work time"
-                Clicked="OnStopClicked"
-                HorizontalOptions="Fill" />
-
-            <Button
-                x:Name="OverviewBtn"
-                Text="Zeitübersicht"
-                BackgroundColor="DeepSkyBlue"
-                IsEnabled="True"
-                SemanticProperties.Hint="Export Times in Excel file"
-                Clicked="OnOverviewClicked"
-                HorizontalOptions="Fill" />
-
-            <Button
-                x:Name="ExitBtn"
-                Text="Beenden"
-                Background="Black"
+                Grid.Column="0"
+                Text="Start"
+                HeightRequest="58"
+                CornerRadius="18"
+                FontSize="17"
+                FontAttributes="Bold"
+                BackgroundColor="#2E7D32"
                 TextColor="White"
-                IsEnabled="True"
-                SemanticProperties.Hint="End the application"
-                Clicked="OnExitClicked"
-                HorizontalOptions="Fill" />
+                Clicked="OnStartClicked"/>
+
+                <Button
+                x:Name="StopBtn"
+                Grid.Column="1"
+                Text="Stop"
+                HeightRequest="58"
+                CornerRadius="18"
+                FontSize="17"
+                FontAttributes="Bold"
+                BackgroundColor="#D32F2F"
+                TextColor="White"
+                Clicked="OnStopClicked"/>
+
+            </Grid>
+
+
+            <Button
+                 x:Name="OverviewBtn"
+                 Text="Übersicht"
+                 HeightRequest="52"
+                 CornerRadius="18"
+                 FontSize="16"
+                 FontAttributes="Bold"
+                 BackgroundColor="#0288D1"
+                 TextColor="White"
+                 Clicked="OnOverviewClicked"
+                 Margin="0,4,0,0"/>
 
 
         </VerticalStackLayout>
