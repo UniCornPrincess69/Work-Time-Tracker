@@ -15,8 +15,5 @@ public partial class OverviewPage : ContentPage
 	private void OnDeleteClicked(object sender, EventArgs e)
 	{
 		_saveSystem.DeleteData();
-
-		//OverviewList.ItemsSource = null;
-		//OverviewList.ItemsSource = _saveSystem.GetTrackedData();
 	}
 }

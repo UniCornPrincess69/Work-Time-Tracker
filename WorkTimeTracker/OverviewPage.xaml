@@ -34,10 +34,15 @@
         </CollectionView>
 
         <Button
+            Padding="10"
             x:Name="DeleteBtn"
             Text="Einträge löschen"
+            HeightRequest="58"
+            WidthRequest="240"
+            CornerRadius="18"
+            FontSize="17"
             BackgroundColor="Red"
-            SemanticProperties.Hint="Delete all times"
+            TextColor="White"
             Clicked="OnDeleteClicked"
             HorizontalOptions="Fill" />
     </VerticalStackLayout>

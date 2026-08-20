@@ -41,10 +41,19 @@ namespace WorkTimeTracker
             currentWorkData = saveSystem.Load();
             ButtonInitialization();
             UpdateStatus();
+            if (currentStatus == WorkStatus.Working)
+            {
+                UpdateElapsedTime();
+                elapsedTimer?.Start();
+            }
             saveSystem.DataChanged += OnDataChanged;
-            if(currentStatus == WorkStatus.Working) elapsedTimer?.Start();
         }
 
+        /// <summary>
+        /// Start button click event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnStartClicked(object? sender, EventArgs e)
         {
             //Debug.WriteLine("Start button clicked");
@@ -63,6 +72,11 @@ namespace WorkTimeTracker
             }
         }
 
+        /// <summary>
+        /// Stop button click event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnStopClicked(object? sender, EventArgs e)
         {
             //Debug.WriteLine("Stop button clicked");
@@ -83,17 +97,20 @@ namespace WorkTimeTracker
             }
         }
 
+        /// <summary>
+        /// Overview Button click handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void OnOverviewClicked(object? sender, EventArgs e)
         {
 
             await Shell.Current.GoToAsync(nameof(OverviewPage));
         }
 
-        private void OnExitClicked(object? sender, EventArgs e)
-        {
-            Application.Current.Quit();
-        }
-
+        /// <summary>
+        /// Initialization of all the buttons needed to use the app
+        /// </summary>
         private void ButtonInitialization()
         {
             startButton = this.FindByName<Button>(startButtonName);
@@ -119,7 +136,10 @@ namespace WorkTimeTracker
 
         }
 
-
+        /// <summary>
+        /// Get current time, can be altered to only show minutes or just hours
+        /// </summary>
+        /// <returns></returns>
         private DateTime GetCurrentTime()
         {
             DateTime now = DateTime.Now;
@@ -133,12 +153,20 @@ namespace WorkTimeTracker
                 now.Second);
         }
 
+        /// <summary>
+        /// On data changed event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnDataChanged(object? sender, EventArgs e)
         {
             overviewButton.IsEnabled = true;
             overviewButton.BackgroundColor = overviewColor;
         }
 
+        /// <summary>
+        /// Update the current status. Used to show current status on MainPage in app
+        /// </summary>
         private void UpdateStatus()
         {
             switch (currentStatus)
@@ -153,6 +181,11 @@ namespace WorkTimeTracker
             }
         }
 
+        /// <summary>
+        /// Update the shown time on timer tick on the main page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnElapsedTimerTick(object? sender, EventArgs e)
         {
             if (currentWorkData is null) return;
@@ -162,6 +195,17 @@ namespace WorkTimeTracker
             ElapsedTimeLabel.Text = elapsed.ToString(@"hh\:mm\:ss");
 
             Debug.WriteLine(elapsed.ToString());
+        }
+
+        /// <summary>
+        /// Update the elapsed Timer
+        /// </summary>
+        private void UpdateElapsedTime()
+        {
+            if(currentWorkData is null) return;
+
+            TimeSpan elapsed = GetCurrentTime() - currentWorkData.StartTime;
+            ElapsedTimeLabel.Text = elapsed.ToString(@"hh\:mm\:ss");
         }
 
     }
